@@ -1,18 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello Flask</title>
-</head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-        </ul>
-    </nav>
+{% extends 'base.html' %} {% block content %}
 
-    <h1>About Page</h1>
-</body>
-</html>
+
+
+<h2>{{ page_title }}</h2>
+<p>
+  Set NFL rookie record with 27 passing TDs, despite starting just 13
+  games…Threw at least one TD pass in each of his 13 starts, trailing only St.
+  Louis' Kurt Warner (23 from 1999-00) and Minnesota's Brad Johnson (15 from
+  1996-97) for the most consecutive starts with a touchdown pass to begin an NFL
+  career...Became the first rookie in NFL history to record a passer rating of
+  150 or higher on 20 or more pass attempts after totaling a 151.2 rating
+  against Atlanta on Nov. 11, 2018…Became Oklahoma's sixth Heisman Trophy winner
+  in program history in 2017…Began is collegiate football career as a walk on at
+  Texas Tech and later walked on at Oklahoma.
+</p>
+
+{% for member in company %}
+
+<div class="row featurette">
+
+    {% if loop.index % 2 != 0 %}
+  <div class="col-md-7">
+    <h3><a href="/about/{{ member.url }}">{{ loop.index }}. {{ member.name }}</a></h3>
+    <p>
+      {{ member.description }}
+    </p>
+  </div>
+  <div class="col-md-5">
+    <img class="featurette-image img-reponsive"
+      src="{{ member.image_source}}"
+      alt=""}}
+    />
+  </div>
+  {% else %}
+  <div class="col-md-5">
+    <img class="featurette-image img-reponsive"
+      src="{{ member.image_source}}"
+      alt=""}}
+    />
+  </div>
+  <div class="col-md-7">
+    <h3><a href="/about/{{ member.url }}">{{ loop.index }}. {{ member.name }}</a></h3>
+    <p>
+      {{ member.description }}
+    </p>
+  </div>
+
+    {% endif %}
+</div>
+
+{% if loop.index != 8 %}
+<hr class="featurette-divider">
+
+{% endif %}
+
+{% endfor %}
+
+{% endblock %}
